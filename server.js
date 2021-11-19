@@ -17,8 +17,18 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost/budget", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
+
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/database-two",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 
 // routes
 app.use(require("./routes/api.js"));
